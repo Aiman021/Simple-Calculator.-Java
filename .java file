@@ -1,0 +1,79 @@
+package lab16_SimpleCalculator;
+
+import javafx.application.Application;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+
+public class SimpleCalculator extends Application
+{
+	 @Override
+	  public void start(Stage primaryStage) {
+	    FlowPane pane = new FlowPane();
+	    pane.setHgap(2);
+	    pane.setAlignment(Pos.CENTER);
+	    TextField num1 = new TextField();
+	    TextField num2 = new TextField();
+	    TextField result = new TextField();
+	    result.setEditable(false);
+	    num1.setPrefColumnCount(3);
+	    num2.setPrefColumnCount(3);
+	    result.setPrefColumnCount(3);
+	    
+	    pane.getChildren().addAll(new Label("Number 1: "), num1,
+	      new Label("Number 2: "), num2, new Label("Result: "), result);
+	    
+	    // Creating the four buttons
+	    HBox hBox = new HBox(5);
+	    Button btnAdd = new Button("Add");
+	    Button btnSubtract = new Button("Subtract");
+	    Button btnMultiply = new Button("Multiply");
+	    Button btnDivide = new Button("Divide");
+	    hBox.setAlignment(Pos.CENTER);
+	    hBox.getChildren().addAll(btnAdd, btnSubtract, btnMultiply, btnDivide);
+	    
+	    BorderPane borderPane = new BorderPane();
+	    borderPane.setCenter(pane);
+	    borderPane.setBottom(hBox);
+	    BorderPane.setAlignment(hBox, Pos.TOP_CENTER);
+
+	    // Creating a scene and placing it in the stage
+	    Scene scene = new Scene(borderPane, 250, 150);
+	    primaryStage.setTitle("SimpleCalculator"); // Stage title
+	    primaryStage.setScene(scene); // Placing the scene in the Stage
+	    primaryStage.show(); // Displaying the Stage
+	    
+	    btnAdd.setOnAction(e -> {
+	      result.setText(Double.parseDouble(num1.getText()) + 
+	        Double.parseDouble(num2.getText()) + "");
+	    });
+
+	    btnSubtract.setOnAction(e -> {
+	      result.setText(Double.parseDouble(num1.getText()) -
+	        Double.parseDouble(num2.getText()) + "");
+	    });
+	    
+	    btnMultiply.setOnAction(e -> {
+	      result.setText(Double.parseDouble(num1.getText()) *
+	       Double.parseDouble(num2.getText()) + "");
+	    });
+
+	    btnDivide.setOnAction(e -> {
+	      result.setText(Double.parseDouble(num1.getText()) /
+	        Double.parseDouble(num2.getText()) + "");
+	    });
+	  }
+	
+	  public static void main(String[] args)
+	  {
+	    launch(args);
+	  }
+
+	
+}
